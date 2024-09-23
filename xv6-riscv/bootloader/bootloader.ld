@@ -6,7 +6,23 @@ ENTRY( _entry )
 SECTIONS
 {
   /* Task: ensure the correct entry address based on where -kernel in QEMU jumps. */
-  . = 0x100000000;
-
+  . = 0x80000000;
+  .text : {
+    *(.text)
+    ecode = .;
+  }
+  .data : {
+    *(.data)
+    edata = .;
+  }
+  .rodata : {
+    *(.rodata)
+    erodata = .;
+  }
+  .bss : {
+    *(.bss)
+    ebss = .;
+  }
+  end = .;
   /* Task lay out the sections as mentioned in the handout */
 }
